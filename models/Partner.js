@@ -15,25 +15,24 @@ const PartnerSchema = new mongoose.Schema(
         unique:true
     },
     country:{
-        type:String,
-        required:true
+        type:String
     },
     img:{
         type:String
     },
     city:{
-        type:String,
-        required:true,
-        unique:true
+        type:String
     },
     phone:{
-        type:String,
-        required:true,
-        unique:true
+        type:String
     },
     password:{
         type:String,
         required:true
+    },
+    isSubscribed:{
+        type: Boolean,
+        default:false
     }
 },
 {
