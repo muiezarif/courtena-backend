@@ -44,9 +44,9 @@ app.use(express.json())
 // })
 
 
-app.get("/", (req,res) => {
-    res.send("First request")
-})
+// app.get("/", (req,res) => {
+//     res.send("First request")
+// })
 app.listen(process.env.PORT || 3030, function(){
     db_connect()
     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
