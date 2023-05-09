@@ -47,8 +47,11 @@ app.use((err,req,res,next) => {
 app.get("/", (req,res) => {
     res.send("First request")
 })
-
-app.listen(8800, () => {
+app.listen(process.env.PORT || 3030, function(){
     db_connect()
-    console.log("Server started on port 8800")
-})
+    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+  });
+// app.listen(8800, () => {
+//     db_connect()
+//     console.log("Server started on port 8800")
+// })
