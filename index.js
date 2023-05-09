@@ -29,19 +29,19 @@ const db_connect = async () => {
 app.use(cors())
 app.use(cookieParser())
 app.use(express.json())
-app.use("/api/auth", authRoute)
-app.use("/api/users", userRoute)
-app.use("/api/venues", venuesRoute)
-app.use("/api/courts", courtsRoute)
-app.use("/api/bookings", bookingsRoute)
-app.use("/api/settlements", settlementsRoute)
-app.use("/api/reports", reportsRoute)
-app.use("/api/customers-feedback", cfRoute)
-app.use((err,req,res,next) => {
-    const errorStatus = err.status || 500
-    const errorMessage = err.message || "Something went wrong!"
-    return res.status(200).json({success:false,message:errorMessage,result:{},error:err})
-})
+// app.use("/api/auth", authRoute)
+// app.use("/api/users", userRoute)
+// app.use("/api/venues", venuesRoute)
+// app.use("/api/courts", courtsRoute)
+// app.use("/api/bookings", bookingsRoute)
+// app.use("/api/settlements", settlementsRoute)
+// app.use("/api/reports", reportsRoute)
+// app.use("/api/customers-feedback", cfRoute)
+// app.use((err,req,res,next) => {
+//     const errorStatus = err.status || 500
+//     const errorMessage = err.message || "Something went wrong!"
+//     return res.status(200).json({success:false,message:errorMessage,result:{},error:err})
+// })
 
 
 app.get("/", (req,res) => {
