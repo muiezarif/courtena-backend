@@ -1,0 +1,12 @@
+export const FIXED_AVOID_UNBOOKABLE_TIME = 1
+export const FIXED_AVOID_UNBOOKABLE_TIME_STRING = "Fixed avoid unbookable time"
+export const FLEX_ALLOW_UNBOOKABLE_TIME = 2
+export const FLEX_ALLOW_UNBOOKABLE_TIME_STRING = "Flex allow unbookable time"
+export const FLEX_AVOID_UNBOOKABLE_TIME = 3
+export const FLEX_AVOID_UNBOOKABLE_TIME_STRING = "Flex avoid unbookable time"
+
+
+
+var reservationRules
+
+export default reservationRules = [{id:FIXED_AVOID_UNBOOKABLE_TIME,name:FIXED_AVOID_UNBOOKABLE_TIME_STRING},{id:FLEX_ALLOW_UNBOOKABLE_TIME,name:FLEX_ALLOW_UNBOOKABLE_TIME_STRING},{id:FLEX_AVOID_UNBOOKABLE_TIME,name:FLEX_AVOID_UNBOOKABLE_TIME_STRING}]

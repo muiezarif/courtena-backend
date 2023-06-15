@@ -1,5 +1,5 @@
 import express from "express";
-import { forgotAdminPassword, forgotCustomerPassword, forgotPartnerPassword, loginAdmin, loginCustomer, loginPartner, registerAdmin, registerCustomer, registerPartner } from "../controllers/auth.js";
+import { forgotAdminPassword, forgotCustomerPassword, forgotPartnerPassword, loginAdmin, loginCustomer, loginPartner, registerAdmin, registerCustomer, registerPartner, resetPartnerPassword } from "../controllers/auth.js";
 
 const router = express.Router();
 
@@ -11,6 +11,7 @@ router.post("/login-partner",loginPartner)
 router.post("/login-customer",loginCustomer)
 router.post("/forgot-password-admin",forgotAdminPassword)
 router.post("/forgot-password-partner",forgotPartnerPassword)
+router.post("/reset-password-partner",resetPartnerPassword)
 router.post("/forgot-password-customer",forgotCustomerPassword)
 
 export default router

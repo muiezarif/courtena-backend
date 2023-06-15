@@ -1,9 +1,23 @@
 import Admin from "../models/Admin.js"
+import Court from "../models/Court.js"
+import Sports from "../models/Sports.js"
+import Venue from "../models/Venue.js"
 export const createAdmin = async (req,res,next) => {
     const newAdmin = new Admin(req.body)
     try {
         const savedAdmin = await newAdmin.save()
         res.status(200).json({success:true,message:"Success",result:savedAdmin, error:{}})    
+    } catch (error) {
+        res.status(200).json({success:false,message:"Failure",result:{},error:error})
+        // res.status(500).json(error)
+    }
+}
+
+export const addCategory = async (req,res,next) => {
+    const newCategory = new Admin(req.body)
+    try {
+        const savedCategory = await newCategory.save()
+        res.status(200).json({success:true,message:"Success",result:savedCategory, error:{}})    
     } catch (error) {
         res.status(200).json({success:false,message:"Failure",result:{},error:error})
         // res.status(500).json(error)
@@ -41,6 +55,24 @@ export const getAllAdmins = async (req,res,next) => {
     try {
         const admins = await Admin.find()
         res.status(200).json({success:true,message:"Success",result:admins, error:{}})    
+    } catch (error) {
+        res.status(200).json({success:false,message:"Failure",result:{},error:error})
+    }
+}
+
+export const getPartnerVenues = async (req,res,next) => {
+    try {
+        const admin = await Venue.find({partner:req.params.partnerId})
+        res.status(200).json({success:true,message:"Success",result:admin, error:{}})    
+    } catch (error) {
+        res.status(200).json({success:false,message:"Failure",result:{},error:error})
+    }
+}
+
+export const getPartnerCourts = async (req,res,next) => {
+    try {
+        const admin = await Court.find({partner:req.params.partnerId})
+        res.status(200).json({success:true,message:"Success",result:admin, error:{}})    
     } catch (error) {
         res.status(200).json({success:false,message:"Failure",result:{},error:error})
     }

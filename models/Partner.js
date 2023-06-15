@@ -33,6 +33,10 @@ const PartnerSchema = new mongoose.Schema(
     isSubscribed:{
         type: Boolean,
         default:false
+    },
+    fp:{
+        type:String,
+        default:""
     }
 },
 {

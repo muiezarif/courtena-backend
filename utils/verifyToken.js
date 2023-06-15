@@ -2,9 +2,7 @@ import jwt from "jsonwebtoken";
 
 
 export const verifyToken = (req,res,next) => {
-    console.log(req.headers.authorization)
-    // console.log(req.cookies.access_token)
-    const token = req.cookies.access_token;
+    const token = req.headers.authorization;
     if(!token){
         return res.status(401).json({success:false,message:"Not Authenticated",result:{},error:{}})
     }
@@ -18,9 +16,7 @@ export const verifyToken = (req,res,next) => {
 }
 
 export const verifyCustomerToken = (req,res,next) => {
-    console.log(req.headers.authorization)
-    // console.log(req.cookies.access_token)
-    const token = req.cookies.access_token;
+    const token = req.headers.authorization;
     if(!token){
         return res.status(401).json({success:false,message:"Not Authenticated",result:{},error:{}})
     }
@@ -34,9 +30,7 @@ export const verifyCustomerToken = (req,res,next) => {
 }
 
 export const verifyPartnerToken = (req,res,next) => {
-    console.log(req.headers.authorization)
-    // console.log(req.cookies.access_token)
-    const token = req.cookies.access_token;
+    const token = req.headers.authorization;
     if(!token){
         return res.status(401).json({success:false,message:"Not Authenticated",result:{},error:{}})
     }

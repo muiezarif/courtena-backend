@@ -19,6 +19,33 @@ const CourtSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
+    bookingInfo:{
+        info:[{date:String,time:String}],
+        customerInfo:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'Customer'
+        }
+    },
+    pricing:{
+        type:[String]
+    },
+    courtFeature:{wall:Boolean,crystal:Boolean,panoramic:Boolean,single:Boolean,double:Boolean},
+    advancedSettings:{bookableOnline:Boolean,courtActive:Boolean},
+    courtType:{
+        type:String
+    },
+    partner:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Partner'
+    },
+    sports:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Sports'
+    },
+    venue:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Venue'
+    },
     courtNumbers:[{number:Number,unavailableTimes:[{type:String}],unavailableDates:[{type:Date}]}]
 },{timestamps:true})
 

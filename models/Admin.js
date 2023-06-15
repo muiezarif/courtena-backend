@@ -14,18 +14,6 @@ const AdminSchema = new mongoose.Schema(
         required:true,
         unique:true
     },
-    country:{
-        type:String
-    },
-    img:{
-        type:String
-    },
-    city:{
-        type:String,
-    },
-    phone:{
-        type:String
-    },
     password:{
         type:String,
         required:true
