@@ -34,6 +34,9 @@ const CourtSchema = new mongoose.Schema({
     courtType:{
         type:String
     },
+    image:{
+        type:String
+    },
     partner:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Partner'
