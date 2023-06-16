@@ -8,7 +8,7 @@ export const createPartnerPricing = async (req,res,next) => {
         try {
             req.body.courtsLinked.map( async (element) => {
                 await Court.findByIdAndUpdate(element,{
-                    $push:{pricing:savedPartnerPricing._id},
+                    $push:{pricing:savedPartnerPricing},
                 }); // You can modify each element and create a new array
               });
             

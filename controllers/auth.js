@@ -86,15 +86,16 @@ export const registerPartner = async (req,res,next) => {
 }
 
 export const registerCustomer = async (req,res,next) => {
+    // console.log(req.body)
     try {
         const salt = bcrypt.genSaltSync(10)
         const hash = bcrypt.hashSync(req.body.password,salt)
 
         const newCustomer = new Customer({
-            username:req.body.username,
-            email:req.body.email,
+            // username:req.body.username,
+            // email:req.body.email,
             password:hash,
-            city:req.body.city,
+            // city:req.body.city,
             phone:req.body.phone
     
         })
@@ -102,6 +103,7 @@ export const registerCustomer = async (req,res,next) => {
         const savedCustomer = await newCustomer.save()
         res.status(200).json({success:true,message:"Success",result:savedCustomer, error:{}})     
     } catch (error) {
+        console.log(error)
         res.status(200).json({success:false,message:"Failure",result:{}, error:error})
     }
 }

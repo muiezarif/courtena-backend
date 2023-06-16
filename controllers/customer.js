@@ -1,4 +1,7 @@
+import Court from "../models/Court.js"
 import Customer from "../models/Customer.js"
+import PartnerPricing from "../models/PartnerPricing.js"
+import Venue from "../models/Venue.js"
 export const createCustomer = async (req,res,next) => {
     const newCustomer = new Customer(req.body)
     try {
@@ -42,6 +45,45 @@ export const getAllCustomers = async (req,res,next) => {
         const customers = await Customer.find()
         res.status(200).json({success:true,message:"Success",result:customers, error:{}})    
     } catch (error) {
+        res.status(200).json({success:false,message:"Failure",result:{},error:error})
+    }
+}
+const getPricings = async(pricing) => {
+    try {
+        const partnerPricing = await PartnerPricing.findById(pricing)
+        return partnerPricing
+    } catch (error) {
+        console.log(error)
+    }
+    
+}
+export const getCustomerHomeData = async (req,res,next) => {
+    try {
+        // console.log("RES")
+        const venues = await Venue.find()
+        // let courts = []
+        const courts = await Court.find()
+        
+        const combinedArray = [];
+        const modifiedCourts = courts.map((court) => {
+            // courtPricing.push(item)
+            // delete item.pricing
+            // combinedArray.push(court)
+            const modifiedCourtPricing = court.pricing.map((pricings) => {
+                 getPricings(pricings)
+            })
+            return {...court.toObject(),pricings:modifiedCourtPricing}
+            // console.log(courtWithPricing)
+            // item.pricings = courtWithPricing
+            // courtPricing.push(item)
+        })
+        // console.log(combinedArray)
+        console.log(modifiedCourts)
+        const result = {venues,modifiedCourts}
+        // console.log(result)
+        res.status(200).json({success:true,message:"Success",result:result, error:{}})    
+    } catch (error) {
+        console.log(error)
         res.status(200).json({success:false,message:"Failure",result:{},error:error})
     }
 }

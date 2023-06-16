@@ -9,7 +9,7 @@ const CourtSchema = new mongoose.Schema({
     },
     price:{
         type:Number,
-        required:true
+        // required:true
     },
     description:{
         type:String,
@@ -27,7 +27,7 @@ const CourtSchema = new mongoose.Schema({
         }
     },
     pricing:{
-        type:[String]
+        type:[Object]
     },
     courtFeature:{wall:Boolean,crystal:Boolean,panoramic:Boolean,single:Boolean,double:Boolean},
     advancedSettings:{bookableOnline:Boolean,courtActive:Boolean},
