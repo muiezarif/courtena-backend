@@ -59,27 +59,9 @@ const getPricings = async(pricing) => {
 }
 export const getCustomerHomeData = async (req,res,next) => {
     try {
-        // console.log("RES")
         const venues = await Venue.find()
-        // let courts = []
         const courts = await Court.find()
-        
-        const combinedArray = [];
-        const modifiedCourts = courts.map((court) => {
-            // courtPricing.push(item)
-            // delete item.pricing
-            // combinedArray.push(court)
-            const modifiedCourtPricing = court.pricing.map((pricings) => {
-                 getPricings(pricings)
-            })
-            return {...court.toObject(),pricings:modifiedCourtPricing}
-            // console.log(courtWithPricing)
-            // item.pricings = courtWithPricing
-            // courtPricing.push(item)
-        })
-        // console.log(combinedArray)
-        console.log(modifiedCourts)
-        const result = {venues,modifiedCourts}
+        const result = {venues,courts}
         // console.log(result)
         res.status(200).json({success:true,message:"Success",result:result, error:{}})    
     } catch (error) {
