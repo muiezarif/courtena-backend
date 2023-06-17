@@ -20,11 +20,7 @@ const CourtSchema = new mongoose.Schema({
         required:true
     },
     bookingInfo:{
-        info:[{date:String,time:String}],
-        customerInfo:{
-            type:mongoose.Schema.Types.ObjectId,
-            ref:'Customer'
-        }
+        type:[Object]
     },
     pricing:{
         type:[Object]

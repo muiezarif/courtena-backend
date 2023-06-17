@@ -69,3 +69,67 @@ export const getCustomerHomeData = async (req,res,next) => {
         res.status(200).json({success:false,message:"Failure",result:{},error:error})
     }
 }
+export const getCustomerCourts = async (req,res,next) => {
+    try {
+        const courts = await Court.find()
+        // console.log(result)
+        res.status(200).json({success:true,message:"Success",result:courts, error:{}})    
+    } catch (error) {
+        console.log(error)
+        res.status(200).json({success:false,message:"Failure",result:{},error:error})
+    }
+}
+export const getCustomerCourtsBySearch = async (req,res,next) => {
+    try {
+        const regex = new RegExp(req.params.searchterm, 'i');
+        const courts = await Court.find({$or: [
+            { title: { $regex: regex } },
+            { courtType: { $regex: regex } },
+          ]})
+        // console.log(result)
+        res.status(200).json({success:true,message:"Success",result:courts, error:{}})    
+    } catch (error) {
+        console.log(error)
+        res.status(200).json({success:false,message:"Failure",result:{},error:error})
+    }
+}
+export const getCustomerVenues = async (req,res,next) => {
+    try {
+        const venues = await Venue.find()
+        // console.log(result)
+        res.status(200).json({success:true,message:"Success",result:venues, error:{}})    
+    } catch (error) {
+        console.log(error)
+        res.status(200).json({success:false,message:"Failure",result:{},error:error})
+    }
+}
+export const getCustomerVenuesBySearch = async (req,res,next) => {
+    try {
+        const regex = new RegExp(req.params.searchterm, 'i');
+        const venues = await Venue.find({$or: [
+            { city: { $regex: regex } },
+            { name: { $regex: regex } },
+            { address: { $regex: regex } },
+          ]})
+        // console.log(result)
+        res.status(200).json({success:true,message:"Success",result:venues, error:{}})    
+    } catch (error) {
+        console.log(error)
+        res.status(200).json({success:false,message:"Failure",result:{},error:error})
+    }
+}
+
+export const getCustomerPartnerCourtsByVenue = async (req,res,next) => {
+    try {
+        // const regex = new RegExp(req.params.searchterm, 'i');
+        const courts = await Court.find({$and: [
+            { partner: req.params.partnerid },
+            { venue: req.params.venueid },
+          ]})
+        // console.log(result)
+        res.status(200).json({success:true,message:"Success",result:courts, error:{}})    
+    } catch (error) {
+        console.log(error)
+        res.status(200).json({success:false,message:"Failure",result:{},error:error})
+    }
+}
