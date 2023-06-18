@@ -22,6 +22,13 @@ const BookingsSchema = new mongoose.Schema({
     time:{
         type:String,
         required:true
+    },
+    dateTimeInfo:{
+        day:String,
+        month:String,
+        year:String,
+        timeFrom:String,
+        timeTo:String
     },       
     customer:{
         type:mongoose.Schema.Types.ObjectId,
