@@ -21,6 +21,10 @@ const CustomerSchema = new mongoose.Schema(
     city:{
         type:String
     },
+    isFirstTime:{
+        type:Boolean,
+        default:false
+    },
     phone:{
         type:String,
         required:true,

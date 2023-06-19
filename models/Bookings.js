@@ -3,17 +3,18 @@ import mongoose from "mongoose";
 const {Schema} = mongoose
 
 const BookingsSchema = new mongoose.Schema({
-    title:{
-        type:String,
-        required:true
-    },
+    // title:{
+    //     type:String,
+    //     required:true
+    // },
     duration:{
-        type:Number,
+        type:String,
         required:true
     },
     status:{
         type:String,
-        required:true
+        // required:true
+        default:""
     },
     date:{
         type:String,
@@ -23,12 +24,20 @@ const BookingsSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    paymentAmount:{
+        type:Number,
+        required:true
+    },
+    paymentStatus:{
+        type:String,
+        default:"Not Paid"
+    },
     dateTimeInfo:{
         day:String,
         month:String,
         year:String,
         timeFrom:String,
-        timeTo:String
+        timeTo:String,
     },       
     customer:{
         type:mongoose.Schema.Types.ObjectId,

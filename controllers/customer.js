@@ -1,6 +1,9 @@
+import Bookings from "../models/Bookings.js"
 import Court from "../models/Court.js"
 import Customer from "../models/Customer.js"
+import Partner from "../models/Partner.js"
 import PartnerPricing from "../models/PartnerPricing.js"
+import Sports from "../models/Sports.js"
 import Venue from "../models/Venue.js"
 export const createCustomer = async (req,res,next) => {
     const newCustomer = new Customer(req.body)
@@ -133,3 +136,55 @@ export const getCustomerPartnerCourtsByVenue = async (req,res,next) => {
         res.status(200).json({success:false,message:"Failure",result:{},error:error})
     }
 }
+export const getCustomerCourtInfo = async (req,res,next) => {
+    try {
+        const court = await Court.findById(req.params.courtid)
+        // console.log(result)
+        res.status(200).json({success:true,message:"Success",result:court, error:{}})    
+    } catch (error) {
+        console.log(error)
+        res.status(200).json({success:false,message:"Failure",result:{},error:error})
+    }
+}
+export const customerCreateBooking = async (req,res,next) => {
+    const newBookings = new Bookings(req.body)
+    try {
+        const savedBookings = await newBookings.save()
+        try {
+            await Court.findByIdAndUpdate(req.body.court,{
+                $push:{bookingInfo:savedBookings},
+            });
+        } catch (error) {
+            res.status(200).json({success:false,message:"Failure",result:{},error:error})
+        }
+        res.status(200).json({success:true,message:"Success",result:savedBookings, error:{}})    
+    } catch (error) {
+        res.status(200).json({success:false,message:"Failure",result:{},error:error})
+        // res.status(500).json(error)
+    }
+}
+export const getCustomerBookings = async (req,res,next) => {
+    try {
+        const bookings = await Bookings.find({customer:req.params.customerid})
+        res.status(200).json({success:true,message:"Success",result:bookings, error:{}})    
+    } catch (error) {
+        res.status(200).json({success:false,message:"Failure",result:{},error:error})
+    }
+}
+
+export const getCustomerBookingDetail = async (req,res,next) => {
+    try {
+        const bookings = await Bookings.findById(req.params.bookingid)
+        const venue_details = await Venue.findById(bookings.venue)
+        const sports = await Sports.findById(bookings.sports)
+        const court_details = await Court.findById(bookings.court)
+        const partner = await Partner.findById(bookings.partner)
+        const result = {bookings,venue_details,sports,court_details,partner}
+        res.status(200).json({success:true,message:"Success",result:result, error:{}})    
+    } catch (error) {
+        res.status(200).json({success:false,message:"Failure",result:{},error:error})
+    }
+}
+
+
+
