@@ -11,6 +11,8 @@ import courtsRoute from "./routes/courts.js"
 import sportsRoute from "./routes/sports.js"
 import subscriptionRoute from "./routes/adminSubscriptions.js"
 import partnerSubscriptionRoute from "./routes/partnerSubscription.js"
+import partnerRoute from "./routes/partner.js"
+import adminRoute from "./routes/admin.js"
 import partnerPricingRoute from "./routes/partnerPricing.js"
 import partnerBillingRoute from "./routes/partnerBilling.js"
 import bookingsRoute from "./routes/bookings.js"
@@ -53,6 +55,8 @@ app.use("/api/admin/subscriptions", subscriptionRoute)
 app.use("/api/partner/subscription", partnerSubscriptionRoute)
 app.use("/api/partner/pricing", partnerPricingRoute)
 app.use("/api/partner/billing", partnerBillingRoute)
+app.use("/api/partner", partnerRoute)
+app.use("/api/admin", adminRoute)
 app.use("/api/customer", customerRoute)
 app.use("/api/bookings", bookingsRoute)
 app.use("/api/settlements", settlementsRoute)

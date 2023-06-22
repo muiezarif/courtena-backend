@@ -1,5 +1,8 @@
 import Admin from "../models/Admin.js"
+import Bookings from "../models/Bookings.js"
 import Court from "../models/Court.js"
+import Customer from "../models/Customer.js"
+import Partner from "../models/Partner.js"
 import Sports from "../models/Sports.js"
 import Venue from "../models/Venue.js"
 export const createAdmin = async (req,res,next) => {
@@ -77,3 +80,48 @@ export const getPartnerCourts = async (req,res,next) => {
         res.status(200).json({success:false,message:"Failure",result:{},error:error})
     }
 }
+
+export const getAdminCustomers = async (req,res,next) => {
+    try {
+        const customers = await Customer.find()
+        res.status(200).json({success:true,message:"Success",result:customers, error:{}})    
+    } catch (error) {
+        res.status(200).json({success:false,message:"Failure",result:{},error:error})
+    }
+}
+
+export const getAdminBookings = async (req,res,next) => {
+    try {
+        const bookings = await Bookings.find()
+        const updatedBookings = bookings.map(async (item) => {
+            const court = await Court.findById(item.court)
+            const venue = await Venue.findById(item.venue)
+            const customer = await Customer.findById(item.customer)
+            const partner = await Partner.findById(item.partner)
+            return {booking:item,court,venue,customer,partner}
+        })
+        const resolvedBookings = await Promise.all(updatedBookings)
+        res.status(200).json({success:true,message:"Success",result:resolvedBookings, error:{}})    
+    } catch (error) {
+        res.status(200).json({success:false,message:"Failure",result:{},error:error})
+    }
+}
+
+export const getPartnerBookings = async(req, res, next) => {
+    try {
+        const bookings = await Bookings.find({partner:req.params.partnerid})
+        const updatedBookings = bookings.map(async (item) => {
+            const court = await Court.findById(item.court)
+            const venue = await Venue.findById(item.venue)
+            const customer = await Customer.findById(item.customer)
+            return {booking:item,court,venue,customer}
+        })
+        const resolvedBookings = await Promise.all(updatedBookings)
+        res.status(200).json({ success: true, message: "Success", result: resolvedBookings, error: {} });
+
+    } catch (error) {
+        res.status(200).json({ success: false, message: "Failure", result: {}, error: error });
+    }
+    
+  }
+
